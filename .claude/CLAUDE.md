@@ -119,31 +119,44 @@ CTF-Team/
 │   ├── agents/          # 봇 정의 파일들
 │   ├── settings.json    # 권한 설정
 │   └── CLAUDE.md        # 이 파일
-├── challenges/          # CTF 문제 작업 디렉토리
-│   ├── web/
-│   ├── pwn/
-│   ├── rev/
-│   ├── forensics/
-│   └── crypto/
+├── challenges/          # CTF 문제 작업 디렉토리 (대회/문제 단위)
+│   ├── dreamhack-2026/  # 대회명
+│   │   ├── rsa-magic/   # 문제명 (복합 문제도 한 폴더에서 관리)
+│   │   │   ├── challenge.py
+│   │   │   ├── flag.enc
+│   │   │   └── solve.py
+│   │   └── web-revenge/
+│   │       ├── app.py
+│   │       └── notes.md
+│   └── codegate-2026/
+│       └── kernel-pwn/
 ├── tools/               # 공용 스크립트
 └── writeups/            # Write-up 저장소
 ```
 
+### 문제 디렉토리 관리 규칙
+
+1. **대회 단위 폴더**: `challenges/<대회명>/` (예: `dreamhack-2026`, `codegate-2026`)
+2. **문제 단위 폴더**: `challenges/<대회명>/<문제명>/` — 모든 관련 파일을 한 곳에
+3. **복합 문제 협업**: 여러 팀이 같은 문제 폴더에서 작업 가능 (crypto+web 등)
+4. **연습 문제**: `challenges/practice/<문제명>/` 으로 관리
+
 ## Tips
 
-1. **문제 파일 제공**: 바이너리, 소스코드, pcap 파일 등을 challenges/ 디렉토리에 저장
+1. **문제 파일 제공**: 바이너리, 소스코드, pcap 파일 등을 `challenges/<대회>/<문제>/`에 저장
 2. **정보 제공**: 문제 설명, 힌트, 서버 주소 등을 함께 제공
-3. **단계별 접근**: Director가 적절한 팀으로 라우팅
+3. **단계별 접근**: Director가 적절한 팀으로 라우팅 (복합 문제는 여러 팀 동시 투입)
 4. **Write-up 저장**: 해결된 문제는 writeups/에 기록
 
 ## Example
 
 ```
-사용자: @director challenges/crypto/rsa_challenge.py 파일 분석해서 풀어줘
+사용자: @director challenges/dreamhack-2026/rsa-magic/ 풀어줘
 
-Director: RSA 관련 암호 문제입니다. crypto-lead에게 위임합니다.
+Director: RSA + 웹 복합 문제입니다. crypto-lead와 web-lead에게 동시 위임합니다.
 
 crypto-lead: e=3으로 작은 지수 공격이 가능합니다. crypto-rsa 전문가에게 위임합니다.
+web-lead: API 엔드포인트에서 암호문을 추출합니다.
 
 crypto-rsa: Hastad's Broadcast Attack 적용...
 [분석 및 풀이]
