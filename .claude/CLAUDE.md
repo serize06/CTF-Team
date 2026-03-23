@@ -141,6 +141,34 @@ CTF-Team/
 3. **복합 문제 협업**: 여러 팀이 같은 문제 폴더에서 작업 가능 (crypto+web 등)
 4. **연습 문제**: `challenges/practice/<문제명>/` 으로 관리
 
+## Agent Teams (Split Pane 모드)
+
+Agent Teams 기능이 활성화되어 있습니다. 여러 에이전트가 각각 별도의 터미널 패널에서 동시에 작업하는 모습을 볼 수 있습니다.
+
+### 사용법
+```
+# tmux 안에서 claude를 실행하면 자동으로 split pane 모드
+tmux
+claude --teammate-mode tmux
+
+# 또는 in-process 모드 (tmux 없이)
+claude --teammate-mode in-process
+```
+
+### 팀 생성 예시
+```
+CTF 문제를 풀기 위한 agent team을 만들어줘.
+- crypto 담당 1명
+- web 담당 1명
+- pwn 담당 1명
+각자 challenges/dreamhack-2026/ 폴더의 문제를 분석해줘.
+```
+
+### 조작법
+- **Shift+Down**: 팀원 간 전환 (in-process 모드)
+- **Ctrl+T**: 태스크 리스트 토글
+- **클릭**: 해당 팀원 패널로 이동 (split pane 모드)
+
 ## Tips
 
 1. **문제 파일 제공**: 바이너리, 소스코드, pcap 파일 등을 `challenges/<대회>/<문제>/`에 저장
