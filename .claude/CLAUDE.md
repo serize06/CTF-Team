@@ -145,14 +145,32 @@ CTF-Team/
 
 Agent Teams 기능이 활성화되어 있습니다. 여러 에이전트가 각각 별도의 터미널 패널에서 동시에 작업하는 모습을 볼 수 있습니다.
 
-### 사용법
-```
-# tmux 안에서 claude를 실행하면 자동으로 split pane 모드
-tmux
+### 표시 모드 선택
+
+| 모드 | 설명 | 요구사항 |
+|------|------|---------|
+| `in-process` | 메인 터미널 내에서 실행, Shift+Down으로 팀원 전환 | 없음 |
+| `tmux` | 각 팀원이 별도 창에서 실행, 클릭으로 이동 | tmux 또는 iTerm2 |
+| `auto` | tmux/iTerm2 감지시 분할 창, 아니면 in-process | 없음 |
+
+### CLI 옵션
+```bash
+# tmux 분할 창 모드
 claude --teammate-mode tmux
 
-# 또는 in-process 모드 (tmux 없이)
+# in-process 모드 (tmux 없이)
 claude --teammate-mode in-process
+
+# 자동 감지
+claude --teammate-mode auto
+```
+
+### 기본값 설정 (사용자 설정)
+`~/.claude/settings.json`에 추가:
+```json
+{
+  "teammateMode": "in-process"
+}
 ```
 
 ### 팀 생성 예시
